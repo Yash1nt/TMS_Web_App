@@ -14,6 +14,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 import MenuTabs from './MenuTabs';
 
@@ -80,10 +84,7 @@ const useStyles = makeStyles((theme) => ({
         },
         ...drawerFixed
     },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
+
     toolbar: {
         display: 'flex',
         alignItems: 'center',
@@ -106,6 +107,10 @@ export default function TMSBody({ routeTabs, parentClasses, value, handleChagne 
     const handleDrawerClose = () => {
         setOpen(!open);
     };
+
+
+
+
 
     return (
         <div className="tms-body">
@@ -131,6 +136,37 @@ export default function TMSBody({ routeTabs, parentClasses, value, handleChagne 
                         </IconButton>
                     </div>
                     <Divider />
+
+                    <List>
+                        {
+                            routeTabs.map((routeOpt) => (
+                                <ListItem
+                                    divider
+                                    button
+                                    component={Link}
+                                    to={routeOpt.link}
+                                    selected={value === routeOpt.activeIndex}
+                                    parentClasses={parentClasses}
+                                    handleChagne={handleChagne}
+                                >
+                                    <ListItemIcon>
+                                        {
+                                            routeOpt.activeIndex === 0 ? <AssignmentIcon /> :
+                                                routeOpt.activeIndex === 1 ? <AssignmentIndIcon /> :
+                                                    routeOpt.activeIndex === 2 ? <MailIcon /> :
+                                                        routeOpt.activeIndex === 3 ? <InboxIcon /> :
+                                                            <MenuBookIcon />
+
+                                        }
+                                    </ListItemIcon>
+                                    <ListItemText className={value === routeOpt.activeIndex ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} primary={routeOpt.name} disableTypography />
+                                </ListItem>
+
+                            ))
+                        }
+                    </List>
+
+                    {/*** 
                     <List>
                         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                             <ListItem button key={text}>
@@ -139,15 +175,7 @@ export default function TMSBody({ routeTabs, parentClasses, value, handleChagne 
                             </ListItem>
                         ))}
                     </List>
-                    <Divider />
-                    <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
-                    </List>
+                    */}
                 </Drawer>
                 <main>
                     <MenuTabs

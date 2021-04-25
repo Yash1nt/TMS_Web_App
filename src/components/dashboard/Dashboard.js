@@ -222,7 +222,7 @@ export default function Dashboard() {
                 handleDrawerOpen={() => setOpenDrawer(!openDrawer)}
             />
 
-            {drawer}
+
         </React.Fragment >
     );
 }
