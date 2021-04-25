@@ -40,7 +40,7 @@ const styles = ({ spacing, theme, breakpoints, palette, shape }) => (
 
 const Header = ({ routeTabs, classes, screen, value, handleChagne, handleDrawerOpen }) => (
     <>
-        <AppBar position='relative' className={classes.subHeaderMargin} style={{ background: '#E3F3FF' }}>
+        <AppBar position='relative' className={classes.subHeaderMargin} style={{background: '#E3F3FF'}}>
             <Toolbar >
                 <IconButton
                     color="inherit"
@@ -56,7 +56,7 @@ const Header = ({ routeTabs, classes, screen, value, handleChagne, handleDrawerO
                     {
                         routeTabs.map((routeOpt) => (
                             <Tab
-                                style={{ textTransform: 'none' }}
+                                style={{textTransform: 'none'}}
                                 className={classes.tab}
                                 component={Link}
                                 to={routeOpt.link}

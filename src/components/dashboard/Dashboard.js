@@ -1,79 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/styles';
-import { useTheme } from "@material-ui/core/styles";
-import clsx from 'clsx';
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-
-import styled from "styled-components";
-import { StylesProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-
-import {
-    Root,
-    getHeader,
-    getDrawerSidebar,
-    getSidebarTrigger,
-    getSidebarContent,
-    getCollapseBtn,
-    getContent,
-    getFooter,
-} from "@mui-treasury/layout";
-import {
-    getDefaultScheme,
-    getStandardScheme,
-    getFixedScheme,
-    getContentBasedScheme,
-    getCozyScheme,
-    getMuiTreasuryScheme,
-} from "@mui-treasury/layout/presets";
-
-
-
-import Header from "../01-01-NavigationBars/Header";
-import TopHeader from "../01-01-NavigationBars/TopHeader";
-import { Divider } from "@material-ui/core";
-
-
-
-import routeTabs from "../../assets/data/tab-options"
-import menuOptions from "../../assets/data/menu-options"
 
 import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from "@material-ui/icons/Menu";
 import Icon from "@material-ui/core/Icon";
-
+import IconButton from '@material-ui/core/IconButton';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Button, ListItemIcon } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { ListItemIcon } from "@material-ui/core";
+import { makeStyles } from '@material-ui/styles';
+import { useTheme } from "@material-ui/core/styles";
 
-const HeaderStyle = getHeader(styled);
-const DrawerSidebar = getDrawerSidebar(styled);
-const SidebarTrigger = getSidebarTrigger(styled);
-const SidebarContent = getSidebarContent(styled);
-const CollapseBtn = getCollapseBtn(styled);
-const Content = getContent(styled);
-const Footer = getFooter(styled);
+import TopHeader from "../01-01-NavigationBars/TopHeader";
+import menuOptions from "../../assets/data/menu-options";
+import routeTabs from "../../assets/data/tab-options";
+
+import TMSBody from './TMSBody';
 
 const drawerWidth = 240;
-
-
-function ElevationScroll(props) {
-    const { children } = props;
-
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 100,
-    });
-
-    return React.cloneElement(children, {
-        elevation: trigger ? 4 : 0,
-    });
-}
-
 
 const useStyles = makeStyles(
     theme => (
@@ -199,11 +143,6 @@ const useStyles = makeStyles(
     )
 );
 
-
-
-
-
-
 export default function Dashboard() {
     const classes = useStyles();
     const theme = useTheme();
@@ -219,30 +158,6 @@ export default function Dashboard() {
     const handleChagne = (e, newValue) => {
         setValue(newValue);
     }
-
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
-        setOpenMenu(true);
-    }
-
-    const handleMenuItemClick = (e, i) => {
-        setAnchorEl(null);
-        setOpenMenu(false);
-        setSelectedIndex(i);
-    }
-
-    const handleClose = (e) => {
-        setAnchorEl(null);
-        setOpenMenu(false);
-    }
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
 
     useEffect(() => {
         [menuOptions, routeTabs].forEach(route => {
@@ -289,27 +204,25 @@ export default function Dashboard() {
 
                         ))
                     }
-
-
                 </List>
             </Drawer>
-
         </React.Fragment>
     )
 
     return (
         <React.Fragment>
-            <div className={classes.root}></div>
-            <ElevationScroll>
-                <TopHeader indicatorColor="primary" />
-            </ElevationScroll>
+            <TopHeader indicatorColor="primary" />
+            <TMSBody
+                routeTabs={routeTabs}
+                menuOptions={menuOptions}
+                value={value}
+                parentClasses={classes}
+                handleChagne={handleChagne}
+                selectedIndex="1"
+                handleDrawerOpen={() => setOpenDrawer(!openDrawer)}
+            />
 
-            <Header routeTabs={routeTabs} menuOptions={menuOptions} value={value} handleChagne={handleChagne} selectedIndex="1" handleDrawerOpen={() => setOpenDrawer(!openDrawer)} />
             {drawer}
         </React.Fragment >
     );
-
-
-
-
 }
