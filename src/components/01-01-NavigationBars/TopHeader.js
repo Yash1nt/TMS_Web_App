@@ -50,7 +50,7 @@ const styles = ({ spacing, theme, breakpoints, palette, shape }) => (
 
 const TopHeader = ({ classes, screen }) => (
     <>
-        <AppBar position="fixed">
+        <AppBar position='relative' style={{ backroundColor: '#E3F3FF' }}>
             <Toolbar disableGutters className={classes.toolbarMargin}  >
                 <img alt="Tast Management System" className={classes.logo} src={tmslogo} />
             </Toolbar >

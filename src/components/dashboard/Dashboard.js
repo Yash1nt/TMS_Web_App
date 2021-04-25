@@ -148,7 +148,8 @@ const useStyles = makeStyles(
             tab: {
                 ...theme.typography.tab,
                 minWidth: 10,
-                marginLeft: "25px"
+                marginLeft: "25px",
+                textTransform: 'none'
             },
             menu: {
                 backgroundColor: theme.palette.common.arcBlue,
@@ -304,14 +305,7 @@ export default function Dashboard() {
             </ElevationScroll>
 
             <Header routeTabs={routeTabs} menuOptions={menuOptions} value={value} handleChagne={handleChagne} selectedIndex="1" handleDrawerOpen={() => setOpenDrawer(!openDrawer)} />
-
-
-            <div className={classes.toolbarMargin} />
             {drawer}
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-
-            </main>
         </React.Fragment >
     );
 
